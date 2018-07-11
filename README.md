@@ -5,4 +5,4 @@ Study development project
 RxJava + Dagger2 + MVVM + databinding + repository patten + usecase
 
 # why
-Patten + dagger + rxjava Study
+for studying Patten + dagger + rxjava
