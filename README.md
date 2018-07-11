@@ -1,4 +1,4 @@
-# NaverBandAnalysis-study-
+# NaverBandAnalysis-study
 Study development project
 
 # keypoint
