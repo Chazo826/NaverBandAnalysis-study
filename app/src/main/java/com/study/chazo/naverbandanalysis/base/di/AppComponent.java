@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.study.chazo.naverbandanalysis.application.ApplicationModule;
 import com.study.chazo.naverbandanalysis.application.GlobalApplication;
+import com.study.chazo.naverbandanalysis.auth.data.AuthRepositoryModule;
+import com.study.chazo.naverbandanalysis.base.data.BaseDataModule;
 
 import javax.inject.Singleton;
 
@@ -18,7 +20,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(modules = {ApplicationModule.class,
         ActivityBindingModule.class,
-        AndroidSupportInjectionModule.class})
+        AndroidSupportInjectionModule.class,
+        BaseDataModule.class,
+        AuthRepositoryModule.class})
 public interface AppComponent extends AndroidInjector<GlobalApplication> {
 
     @Component.Builder

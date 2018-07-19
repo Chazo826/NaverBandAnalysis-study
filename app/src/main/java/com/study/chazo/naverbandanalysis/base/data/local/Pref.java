@@ -12,17 +12,11 @@ import com.google.gson.Gson;
  */
 
 public class Pref {
-    private static Pref instance;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private Pref(Context context) {
+    public Pref(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    public static synchronized Pref getInstance(Context context) {
-        if (instance == null) instance = new Pref(context);
-        return instance;
     }
 
     public void put(String key, String val) {

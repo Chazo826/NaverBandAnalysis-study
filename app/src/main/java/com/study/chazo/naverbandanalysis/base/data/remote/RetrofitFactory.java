@@ -2,6 +2,7 @@ package com.study.chazo.naverbandanalysis.base.data.remote;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.study.chazo.naverbandanalysis.auth.data.remote.AuthService;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -13,16 +14,13 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.study.chazo.naverbandanalysis.base.Constants.BandApiConstant.AUTH_BASE_URL;
+
 /**
  * Created by Chazo on 2018-07-12
  */
 public class RetrofitFactory {
-    private static RetrofitFactory instance = new RetrofitFactory();
     private final int cacheSize = 10 * 1024 * 1024;
-
-    public static RetrofitFactory getInstance() {
-        return instance;
-    }
 
     private Retrofit createRetrofit(final String baseUrl, final boolean isCache){
         final Gson responseGson = createGsonBuilder();
@@ -56,5 +54,9 @@ public class RetrofitFactory {
     private File getCacheDir(){
         File file = new File("./cache");
         return file;
+    }
+
+    public AuthService getAuthService(){
+        return createRetrofit(AUTH_BASE_URL, false).create(AuthService.class);
     }
 }

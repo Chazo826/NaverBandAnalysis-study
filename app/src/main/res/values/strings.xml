@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NaverBandAnalysis</string>
+    <string name="login_button">Login</string>
+
+    <string name="auth_client_id">221942680</string>
+    <string name="auth_client_secret">3bbQqQ27gDG8w5RBDFMLundFyehVEQjT</string>
+    <string name="auth_redirect_url">https://com.chazo.band.analysis/login/redirect</string>
+</resources>
