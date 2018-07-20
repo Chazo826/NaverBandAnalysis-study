@@ -28,6 +28,7 @@ allprojects {
 }
 
 ext{
+    androidSupport = "27.1.1"
     okhttp = "3.10.0"
     dagger = "2.16"
     retrofit2 = "2.4.0"
