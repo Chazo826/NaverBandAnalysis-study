@@ -82,6 +82,10 @@ public class Pref {
         return gson.fromJson(json, classType);
     }
 
+    public boolean contains(String key) {
+        return sharedPreferences.contains(key);
+    }
+
     @SuppressLint("CommitPrefEdits")
     private void edit() {
         if (editor == null) {

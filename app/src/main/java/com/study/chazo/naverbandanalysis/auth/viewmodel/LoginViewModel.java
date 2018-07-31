@@ -74,7 +74,6 @@ public class LoginViewModel implements BaseViewModel {
                         return Single.just(authToken);
                     }
                 })
-                .filter(authToken -> authToken != null)
                 .subscribe(authToken -> {
                             authTokenSuccessSubject.onNext(true);
                         },

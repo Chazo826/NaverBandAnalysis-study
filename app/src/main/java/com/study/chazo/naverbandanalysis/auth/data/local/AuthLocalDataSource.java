@@ -40,4 +40,10 @@ public class AuthLocalDataSource implements AuthDataSource {
     public Single<AuthToken> getAuthToken(String authorizationCode) {
         return null;
     }
+
+    @Override
+    public Single<Boolean> isAuthToken() {
+        return Single.just(mPref.contains(AUTH_TOKEN_KEY));
+
+    }
 }

@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.study.chazo.naverbandanalysis.MainActivity;
+import com.study.chazo.naverbandanalysis.bands.view.BandsActivity;
 import com.study.chazo.naverbandanalysis.R;
 import com.study.chazo.naverbandanalysis.auth.viewmodel.LoginViewModel;
 import com.study.chazo.naverbandanalysis.base.view.BaseBindingActivity;
@@ -44,8 +44,14 @@ public class LoginActivity extends BaseBindingActivity<ActivityLoginBinding> {
 
     private void moveMainActivity() {
         Log.d("!!!!", "move");
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, BandsActivity.class));
         finish();
+    }
+
+    private void getAuthToken(Intent intent) {
+        if(intent.getData() != null) {
+            loginViewModel.getAuthToken(intent.getData());
+        }
     }
 
     @Override
@@ -53,12 +59,6 @@ public class LoginActivity extends BaseBindingActivity<ActivityLoginBinding> {
         super.onNewIntent(intent);
         Log.d("!!!!", "onNewIntent");
         getAuthToken(intent);
-    }
-
-    private void getAuthToken(Intent intent) {
-        if(intent.getData() != null) {
-            loginViewModel.getAuthToken(intent.getData());
-        }
     }
 
     @Override

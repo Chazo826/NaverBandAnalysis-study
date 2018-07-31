@@ -12,4 +12,6 @@ public interface AuthDataSource {
     Single<AuthToken> getAuthToken();
 
     Single<AuthToken> getAuthToken(String authorizationCode);
+
+    Single<Boolean> isAuthToken();
 }

@@ -17,7 +17,9 @@ public class GetAuthToken {
     }
 
     public Single<AuthToken> execute(){
-        return authRepository.getAuthToken();
+        return authRepository.isAuthToken()
+                .filter(isAuthToken -> isAuthToken)
+                .flatMapSingle(__ -> authRepository.getAuthToken());
     }
 
     public Single<AuthToken> execute(String authorizationCode){

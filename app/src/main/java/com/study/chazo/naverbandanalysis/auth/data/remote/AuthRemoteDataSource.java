@@ -42,4 +42,9 @@ public class AuthRemoteDataSource implements AuthDataSource {
                     return authToken;
                 });
     }
+
+    @Override
+    public Single<Boolean> isAuthToken() {
+        return null;
+    }
 }

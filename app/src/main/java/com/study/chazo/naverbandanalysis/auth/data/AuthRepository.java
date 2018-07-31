@@ -31,7 +31,8 @@ public class AuthRepository implements AuthDataSource {
         if(authTokenCache != null) {
             return Single.just(authTokenCache);
         }
-        return authLocalDataSource.getAuthToken();
+        return authLocalDataSource.getAuthToken()
+                .map(authToken -> authTokenCache = authToken);
     }
 
     @Override
@@ -41,5 +42,10 @@ public class AuthRepository implements AuthDataSource {
                     authLocalDataSource.saveAuthToken(authToken);
                     authTokenCache = authToken;
                 });
+    }
+
+    @Override
+    public Single<Boolean> isAuthToken() {
+        return authLocalDataSource.isAuthToken();
     }
 }
