@@ -12,5 +12,4 @@ public class AuthToken {
     public long expiresIn;
     @SerializedName("refresh_token")
     public String refreshToken;
-
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.study.chazo.naverbandanalysis.BR;
 import com.study.chazo.naverbandanalysis.base.viewmodel.BaseItemViewModel;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class BindingRecyclerViewAdapter<ViewModel extends BaseItemViewModel> ext
         }
 
         void bind(BaseItemViewModel viewModel, int position) {
-            binding.setVariable(BR.position, position);
+//            binding.setVariable(BR., position);
             binding.setVariable(BR.viewModel, viewModel);
             binding.executePendingBindings();
         }

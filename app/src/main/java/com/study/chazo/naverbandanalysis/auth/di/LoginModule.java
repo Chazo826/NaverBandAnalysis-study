@@ -6,6 +6,8 @@ import com.study.chazo.naverbandanalysis.auth.viewmodel.LoginViewModel;
 import com.study.chazo.naverbandanalysis.base.di.ActivityScoped;
 import com.study.chazo.naverbandanalysis.base.viewmodel.BaseViewModel;
 
+import javax.inject.Singleton;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -20,6 +22,7 @@ public abstract class LoginModule {
     @Binds
     public abstract BaseViewModel provideLoginViewModel(LoginViewModel loginViewModel);
 
+    @Singleton
     @ActivityScoped
     @Provides
     public static GetAuthToken provideGetAuthToken(AuthRepository authRepository){

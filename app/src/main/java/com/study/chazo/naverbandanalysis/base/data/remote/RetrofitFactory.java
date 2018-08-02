@@ -3,6 +3,7 @@ package com.study.chazo.naverbandanalysis.base.data.remote;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.study.chazo.naverbandanalysis.auth.data.remote.AuthService;
+import com.study.chazo.naverbandanalysis.bands.data.remote.BandService;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -15,6 +16,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.study.chazo.naverbandanalysis.base.Constants.BandApiConstant.AUTH_BASE_URL;
+import static com.study.chazo.naverbandanalysis.base.Constants.BandApiConstant.BAND_BASE_URL;
 
 /**
  * Created by Chazo on 2018-07-12
@@ -58,5 +60,9 @@ public class RetrofitFactory {
 
     public AuthService getAuthService(){
         return createRetrofit(AUTH_BASE_URL, false).create(AuthService.class);
+    }
+
+    public BandService getBandService(){
+        return createRetrofit(BAND_BASE_URL, false).create(BandService.class);
     }
 }
