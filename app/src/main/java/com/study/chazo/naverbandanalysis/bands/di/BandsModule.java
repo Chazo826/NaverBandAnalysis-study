@@ -25,23 +25,20 @@ public abstract class BandsModule {
 
     @ActivityScoped
     @Binds
-    public abstract BaseViewModel provideLoginViewModel(BandsViewModel bandsViewModel);
+    public abstract BaseViewModel provideBandsViewModel(BandsViewModel bandsViewModel);
 
-    @Singleton
     @ActivityScoped
     @Provides
     public static GetBands provideGetBands(BandRepository bandRepository){
         return new GetBands(bandRepository);
     }
 
-    @Singleton
     @ActivityScoped
     @Provides
     public static GetBandsToRemote provideGetBandsToRemote(BandRepository bandRepository){
         return new GetBandsToRemote(bandRepository);
     }
 
-    @Singleton
     @ActivityScoped
     @Provides
     public static IsBandsToLocal provideIsBandsToLocal(BandRepository bandRepository){

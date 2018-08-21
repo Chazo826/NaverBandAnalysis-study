@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.study.chazo.naverbandanalysis.bands.viewmodel.BandItemViewModel" />
+
+        <variable
+            name="count"
+            type="int" />
 
     </data>
 
@@ -11,14 +19,16 @@
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            bind:imageUrl="@{viewModel.cover}"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:lines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:text="@{viewModel.bandName}"/>
 
     </LinearLayout>
 </layout>

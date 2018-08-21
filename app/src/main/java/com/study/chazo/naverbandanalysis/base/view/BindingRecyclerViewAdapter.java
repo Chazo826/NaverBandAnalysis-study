@@ -1,6 +1,8 @@
 package com.study.chazo.naverbandanalysis.base.view;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -17,28 +19,60 @@ import java.util.List;
  * Created by Chazo on 2018-07-20
  */
 public class BindingRecyclerViewAdapter<ViewModel extends BaseItemViewModel> extends RecyclerView.Adapter<BindingRecyclerViewAdapter.BindViewHolder> {
-    private List<ViewModel> items = new ArrayList<>();
+    private ObservableArrayList<ViewModel> items;
+    private ObservableList.OnListChangedCallback listChangedCallback;
 
-    public void setItems(List<ViewModel> items) {
-        this.items.clear();
-        this.items.addAll(items);
+    public BindingRecyclerViewAdapter(){
+        listChangedCallback = new ObservableList.OnListChangedCallback<ObservableList<ViewModel>>() {
+            @Override
+            public void onChanged(ObservableList<ViewModel> sender) {}
+
+            @Override
+            public void onItemRangeChanged(ObservableList<ViewModel> sender, int positionStart, int itemCount) {
+                notifyItemRangeChanged(positionStart, itemCount);
+            }
+
+            @Override
+            public void onItemRangeInserted(ObservableList<ViewModel> sender, int positionStart, int itemCount) {
+                notifyItemRangeInserted(positionStart, itemCount);
+            }
+
+            @Override
+            public void onItemRangeMoved(ObservableList<ViewModel> sender, int fromPosition, int toPosition, int itemCount) {
+                notifyItemRangeChanged(fromPosition, toPosition+itemCount);
+            }
+
+            @Override
+            public void onItemRangeRemoved(ObservableList<ViewModel> sender, int positionStart, int itemCount) {
+                notifyItemRangeRemoved(positionStart, itemCount);
+            }
+        };
     }
 
-    public void addItems(List<ViewModel> items) {
-        this.items.addAll(items);
+    public void setItems(@NonNull ObservableArrayList<ViewModel> items) {
+        if(this.items != null) {
+            this.items.removeOnListChangedCallback(listChangedCallback);
+        }
+        this.items = items;
+        this.items.addOnListChangedCallback(listChangedCallback);
+        notifyDataSetChanged();
     }
 
-    public void addItem(ViewModel item) {
-        items.add(item);
-    }
-
-    public void removeItem(int position) {
-        items.remove(position);
-    }
-
-    public void removeItem(ViewModel item) {
-        items.remove(item);
-    }
+//    public void addItems(List<ViewModel> items) {
+//        this.items.addAll(items);
+//    }
+//
+//    public void addItem(ViewModel item) {
+//        items.add(item);
+//    }
+//
+//    public void removeItem(int position) {
+//        items.remove(position);
+//    }
+//
+//    public void removeItem(ViewModel item) {
+//        items.remove(item);
+//    }
 
     @NonNull
     @Override
@@ -56,6 +90,7 @@ public class BindingRecyclerViewAdapter<ViewModel extends BaseItemViewModel> ext
 
     @Override
     public int getItemCount() {
+        if(items == null) return 0;
         return items.size();
     }
 

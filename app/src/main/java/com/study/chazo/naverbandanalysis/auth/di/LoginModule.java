@@ -22,7 +22,6 @@ public abstract class LoginModule {
     @Binds
     public abstract BaseViewModel provideLoginViewModel(LoginViewModel loginViewModel);
 
-    @Singleton
     @ActivityScoped
     @Provides
     public static GetAuthToken provideGetAuthToken(AuthRepository authRepository){

@@ -33,7 +33,6 @@ public interface AppComponent extends AndroidInjector<GlobalApplication> {
 
         @BindsInstance
         AppComponent.Builder application(Application application);
-
         AppComponent build();
     }
 }
