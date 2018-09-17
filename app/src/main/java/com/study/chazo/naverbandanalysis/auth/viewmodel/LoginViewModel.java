@@ -37,7 +37,7 @@ public class LoginViewModel implements BaseViewModel {
         authTokenSuccessSubject = BehaviorSubject.create();
     }
 
-    public void getAuthToken(Uri uri){
+    public void getAuthToken(Uri uri) {
         Log.d("!!!!", "getAuthToken");
         String authorizationCode = uri.getQueryParameter("code");
         if(authorizationCode == null) {
@@ -45,8 +45,15 @@ public class LoginViewModel implements BaseViewModel {
             return;
         }
         disposable.add(getAuthToken.execute(authorizationCode)
-                .subscribe(authToken -> authTokenSuccessSubject.onNext(true),
-                        throwable -> authTokenSuccessSubject.onError(throwable))
+                .subscribe(authToken -> {
+                            Log.d("!!!!", "token get, subject next");
+                            Log.d("!!!!", "authTokenSuccessSubject: " +
+                                    authTokenSuccessSubject.hasComplete());
+                            Log.d("!!!!", "hasObserver: " +
+                                    authTokenSuccessSubject.hasObservers());
+                            authTokenSuccessSubject.onNext(true);
+                        },
+                        Throwable::printStackTrace)
         );
     }
 
@@ -79,9 +86,10 @@ public class LoginViewModel implements BaseViewModel {
                         },
                         throwable -> {
                             if (throwable instanceof NullPointerException) {
-                                return;
+                                Log.e("LoginViewModel","NullPointerException: " + throwable.getMessage());
+                            } else {
+                                throwable.printStackTrace();
                             }
-                            authTokenSuccessSubject.onError(throwable);
                         })
         );
     }

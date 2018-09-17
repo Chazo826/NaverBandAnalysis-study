@@ -28,6 +28,7 @@ public class LoginActivity extends BaseBindingActivity<ActivityLoginBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginViewModel.onCreate();
+        Log.d("!!!!", loginViewModel.toString());
 
         onAuthTokenSuccessEvent();
         getAuthToken(getIntent());
@@ -39,7 +40,8 @@ public class LoginActivity extends BaseBindingActivity<ActivityLoginBinding> {
     private void onAuthTokenSuccessEvent(){
         tokenDisposable = loginViewModel.authTokenSuccessSubject
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(__ -> moveMainActivity(), Throwable::printStackTrace);
+                .subscribe(__ -> moveMainActivity());
+        Log.d("!!!!", "!EDASF: " + loginViewModel.authTokenSuccessSubject.hasObservers());
     }
 
     private void moveMainActivity() {
@@ -57,6 +59,7 @@ public class LoginActivity extends BaseBindingActivity<ActivityLoginBinding> {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        Log.d("!!!!", loginViewModel.toString());
         Log.d("!!!!", "onNewIntent");
         getAuthToken(intent);
     }
@@ -89,9 +92,8 @@ public class LoginActivity extends BaseBindingActivity<ActivityLoginBinding> {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("!!!!", "onDestroy");
         tokenDisposable.dispose();
         loginViewModel.onDestroy();
     }
-
-
 }
